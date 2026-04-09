@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="page-hero hero-articles">
+    <div class="container-fluid text-center">
+        <h1>Articles</h1>
+        <p>Insights, analysis, and perspectives</p>
+    </div>
+</section>
+
+<!-- ARTICLES -->
+<div class="container py-5">
+    <div class="row">
+
+        {% for article in articles %}
+        <div class="col-md-4 mb-4">
+
+            <div class="article-card">
+
+                <!-- IMAGE -->
+                <div class="article-img-wrapper">
+                    <img src="{{ article.image.url }}" class="article-img">
+                </div>
+
+                <!-- CONTENT -->
+                <div class="article-content">
+
+                    <h5>{{ article.title }}</h5>
+
+                    <p class="article-meta">
+                        {{ article.created_at|date:"M d,Y" }} &nbsp; • &nbsp; {{ article.date }}
+                    </p>
+
+                    <p class="article-desc">
+                        {{article.short_description |truncatewords:20}}
+                    </p>
+                    
+
+                    <a href="{% url 'article_detail' article.id %}" 
+                       class="btn btn-outline-light btn-sm">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

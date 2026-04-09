@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-hero hero-expertise">
+
+<div class="container py-5">
+
+    <!-- Heading -->
+    <h2 class="text-center mb-3">My Experiences</h2>
+
+    <!-- Description -->
+    <p class="text-center text-light mb-5">
+        A journey shaped by diverse roles, analytical thinking, and real-world problem solving across domains.
+    </p>
+</section>
+
+    <!-- Cards -->
+<div class="container py-5">
+    <div class="row">
+
+        {% for exp in experiences %}
+
+        <div class="col-md-4 mb-4">
+            <div class="exp-card">
+
+                <img src="{{ exp.image.url }}" class="exp-img">
+
+                <h4>{{ exp.role }}</h4>
+                <p class="exp-field">{{ exp.field }}</p>
+
+                <p class="exp-desc">
+                    {{ exp.description|truncatewords:20 }}
+                </p>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

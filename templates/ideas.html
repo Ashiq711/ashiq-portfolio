@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="page-hero hero-ideas">
+    <div class="container-fluid text-center">
+        <h1>Business Ideas</h1>
+        <p>Strategic concepts designed for real-world impact and scalable execution.</p>
+    </div>
+</section>
+
+<!-- IDEAS SECTION -->
+<div class="container py-5">
+    <div class="row">
+
+        {% for idea in ideas %}
+        <div class="col-md-6 mb-4">
+
+            <div class="idea-card">
+
+                <!-- IMAGE -->
+                <div class="idea-img-wrapper">
+                    <img src="{{ idea.image.url }}" class="idea-img">
+                </div>
+
+                <!-- CONTENT -->
+                <div class="idea-content">
+
+                    <h4>{{ idea.title }}</h4>
+                    <p class="idea-sector">{{ idea.sector }}</p>
+
+                    <!-- DESCRIPTION -->
+                    <p class="idea-desc"
+                       id="desc-{{ idea.id }}"
+                       data-short="{{ idea.description|truncatewords:25 }}"
+                       data-full="{{ idea.description }}">
+                       {{ idea.description|truncatewords:25 }}
+                    </p>
+
+                    <!-- ACTIONS -->
+                    <div class="idea-actions">
+
+                        <!-- READ MORE -->
+                        <a href="{% url 'idea_detail' idea.id %}"
+                        class="btn btn-outline-light btn-sm">
+                        Read More
+                    </a>
+
+                        {% if idea.is_paid %}
+
+                        <!-- 🔥 UNLOCK BUTTON -->
+                        <button class="btn btn-warning btn-sm pay-btn"
+                                data-id="{{ idea.id }}"
+                                data-title="{{ idea.title }}"
+                                data-price="{{ idea.price }}">
+                            Unlock ₹{{ idea.price }}
+                        </button>
+
+                        {% else %}
+
+                        <a href="{{ idea.document.url }}" class="btn btn-success btn-sm">
+                            Download
+                        </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<!-- ✅ RAZORPAY SCRIPT -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- ✅ JS LOGIC -->
+<script>
+
+document.querySelectorAll('.pay-btn').forEach(button => {
+
+    button.onclick = function () {
+
+        var ideaId = this.dataset.id;
+        var title = this.dataset.title;
+        var price = this.dataset.price;
+
+        var options = {
+            "key": "rzp_test_SZjm7EBwE9L93N",  // 🔴 replace this
+            "amount": price * 100,  // convert ₹ to paise
+            "currency": "INR",
+            "name": "Ashiq Abbas",
+            "description": title,
+
+            "handler": function (response) {
+
+                // 🔥 send data to backend
+                fetch("/payment-success/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        'razorpay_order_id': response.razorpay_order_id,
+                        'razorpay_payment_id': response.razorpay_payment_id,
+                        'razorpay_signature': response.razorpay_signature
+                    })
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.body.innerHTML = data;
+                });
+
+            },
+
+            "theme": {
+                "color": "#f0b90b"
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+
+    }
+
+});
+
+
+// READ MORE FUNCTION
+function toggleDesc(id) {
+    let el = document.getElementById("desc-" + id);
+
+    if (el.innerText === el.dataset.short) {
+        el.innerText = el.dataset.full;
+    } else {
+        el.innerText = el.dataset.short;
+    }
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h2>{{ idea.title }}</h2>
+    <p>{{ idea.sector }}</p>
+    <hr>
+
+    <p>{{ idea.description }}</p>
+
+    {% if idea.is_paid %}
+        <button class="btn btn-warning">Unlock ₹{{ idea.price }}</button>
+    {% else %}
+        <a href="{{ idea.document.url }}" class="btn btn-success">Download</a>
+    {% endif %}
+</div>
+
+{% endblock %}

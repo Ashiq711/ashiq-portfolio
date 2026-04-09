@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- HERO -->
+<section class="page-hero hero-about">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Know More</h1>
+        <p class="mt-3 text-light">A deeper look into my journey, experiences, and growth.</p>
+    </div>
+</section>
+
+<section class="about-section">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- LEFT FIXED IMAGE -->
+            <div class="col-lg-5">
+                <div class="about-image">
+                    <img src="{% static 'images/your-photo.jpg' %}" alt="profile">
+                </div>
+            </div>
+
+            <!-- RIGHT SCROLLABLE CONTENT -->
+            <div class="col-lg-7">
+                <div class="about-scroll">
+
+                    <div class="timeline">
+
+                        {% for journey in journeys %}
+                        <div class="timeline-item">
+
+                            <div class="timeline-icon">
+                                <i class="{{ journey.icon }}"></i>
+                            </div>
+
+                            <div class="timeline-content">
+                                <h4>{{ journey.title }}</h4>
+                                <p class="timeline-period">{{ journey.period }}</p>
+                                <p>{{ journey.description }}</p>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

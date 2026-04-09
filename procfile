@@ -1,0 +1,1 @@
+web: gunicorn ashiq_portfolio.wsgi:application
