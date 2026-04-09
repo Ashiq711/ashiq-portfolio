@@ -23,6 +23,16 @@ cloudinary.config(
     api_key = "559434496283274",
     api_secret = "-W9Z-M_phTyFDoOnRnpWuKtf2Dg"
 )
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
+}
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
