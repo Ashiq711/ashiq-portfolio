@@ -44,13 +44,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r@8-+veijohi2pap8sgo_snwiyk(g+-i746afxboz44(+ommx&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.ngrok-free.dev"
-]
+    "https://*.onrender.com",
+    ]
 
 
 # Application definition
