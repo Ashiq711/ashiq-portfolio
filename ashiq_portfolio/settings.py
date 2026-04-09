@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from django.conf import settings
 import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 cloudinary.config(
     cloud_name = "deawo6mut",
@@ -158,3 +161,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'abbasashique7@gmail.com'
 EMAIL_HOST_PASSWORD = 'uknmsmwitoxjqicc'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
