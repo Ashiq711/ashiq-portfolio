@@ -16,7 +16,7 @@ class Idea(models.Model):
     description = models.TextField()
     image = CloudinaryField('image')
     
-    document = models.FileField(upload_to='ideas_docs/', blank=True, null=True)
+    document = CloudinaryField(resource_type='raw', blank=True, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
     is_paid = models.BooleanField(default=True)
 
