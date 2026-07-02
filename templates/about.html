@@ -3,7 +3,6 @@
 
 {% block content %}
 
-<!-- HERO -->
 <section class="page-hero hero-about">
     <div class="about-hero-box">
         <h1>My Journey</h1>
@@ -12,35 +11,23 @@
     </div>
 </section>
 
-<!-- JOURNEY SECTION -->
-<section class="aa-journey-section">
-
-    <!-- Main vertical line -->
-    <div class="timeline-main-line"></div>
-
-    <div class="aa-journey-wrapper">
+<section class="journey-clean-section">
+    <div class="journey-clean-wrapper">
 
         {% for journey in journeys %}
-        <div class="timeline-entry">
+        <div class="journey-clean-card">
 
-            <!-- LEFT YEAR -->
-            <div class="timeline-year">
-                {{ journey.period }}
-            </div>
-
-            <!-- CENTER ICON -->
-            <div class="timeline-center">
-
-                <div class="timeline-dot"></div>
-
-                <div class="timeline-icon">
-                    <i class="{{ journey.icon }}"></i>
+            <div class="journey-left">
+                <div class="journey-period">
+                    {{ journey.period }}
                 </div>
 
+                <div class="journey-icon">
+                    <i class="{{ journey.icon }}"></i>
+                </div>
             </div>
 
-            <!-- RIGHT CARD -->
-            <div class="timeline-card">
+            <div class="journey-right">
                 <h2>{{ journey.title }}</h2>
                 <p>{{ journey.description }}</p>
             </div>
@@ -52,200 +39,147 @@
 </section>
 
 <style>
-/* HERO */
 .about-hero-box{
-    position: relative;
-    z-index: 2;
-    text-align: center;
+    text-align:center;
 }
 
 .about-hero-box h1{
-    color: white;
-    font-size: 82px;
-    font-weight: 800;
-    margin-bottom: 12px;
+    color:white;
+    font-size:64px;
+    font-weight:800;
 }
 
 .hero-orange-line{
-    width: 90px;
-    height: 4px;
-    background: #ED7014;
-    margin: 20px auto;
-    border-radius: 10px;
+    width:80px;
+    height:4px;
+    background:#ED7014;
+    margin:18px auto;
+    border-radius:20px;
 }
 
 .about-hero-box p{
-    color: #d0d0d0;
-    font-size: 26px;
+    color:#d0d0d0;
+    font-size:20px;
 }
 
-/* SECTION */
-.aa-journey-section{
-    position: relative;
-    background: #050505;
-    padding: 90px 0;
+.journey-clean-section{
+    background:#050505;
+    padding:70px 0;
 }
 
-/* VERTICAL LINE */
-.timeline-main-line{
-    position: absolute;
-    left: 27%;
-    top: 80px;
-    bottom: 80px;
-    width: 3px;
-    background: #ED7014;
-    box-shadow: 0 0 15px rgba(237,112,20,0.7);
+.journey-clean-wrapper{
+    width:82%;
+    max-width:1400px;
+    margin:auto;
 }
 
-.aa-journey-wrapper{
-    width: 75%;
-    max-width: 1500px;
-    margin: auto;
+.journey-clean-card{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin-bottom:28px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:22px 26px;
+    transition:0.3s ease;
 }
 
-/* ENTRY */
-.timeline-entry{
-    display: grid;
-    grid-template-columns: 260px 140px 1fr;
-    gap: 28px;
-    align-items: center;
-    margin-bottom: 26px;
+.journey-clean-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(237,112,20,0.14);
 }
 
-/* YEAR */
-.timeline-year{
-    color: #ED7014;
-    font-size: 34px;
-    font-weight: 700;
-    text-align: right;
+.journey-left{
+    width:220px;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
 }
 
-/* CENTER */
-.timeline-center{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.journey-period{
+    color:#ED7014;
+    font-size:22px;
+    font-weight:700;
 }
 
-.timeline-dot{
-    position: absolute;
-    left: -14px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: white;
-    border: 4px solid #ED7014;
-    box-shadow: 0 0 18px rgba(237,112,20,0.9);
+.journey-icon{
+    width:68px;
+    height:68px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.12);
 }
 
-.timeline-icon{
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.10);
-    backdrop-filter: blur(8px);
+.journey-icon i{
+    color:#ED7014;
+    font-size:26px;
 }
 
-.timeline-icon i{
-    color: #ED7014;
-    font-size: 26px;
+.journey-right{
+    flex:1;
+    border-left:4px solid #ED7014;
+    padding-left:26px;
 }
 
-/* CARD */
-.timeline-card{
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-left: 4px solid #ED7014;
-    border-radius: 18px;
-    padding: 24px 28px;
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
+.journey-right h2{
+    color:white;
+    font-size:24px;
+    margin-bottom:12px;
+    font-weight:700;
 }
 
-.timeline-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 0 30px rgba(237,112,20,0.15);
+.journey-right p{
+    color:#c8c8c8;
+    font-size:15px;
+    line-height:1.8;
 }
 
-.timeline-card h2{
-    color: white;
-    font-size: 24px;
-    margin-bottom: 18px;
-    font-weight: 700;
-}
-
-.timeline-card p{
-    color: #c8c8c8;
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-/* TABLET */
-@media (max-width: 1200px){
-    .timeline-card h2{
-        font-size: 30px;
-    }
-
-    .timeline-card p{
-        font-size: 17px;
-    }
-
-    .timeline-year{
-        font-size: 22px;
-    }
-}
-
-/* MOBILE */
+/* Mobile */
 @media (max-width: 992px){
 
     .about-hero-box h1{
-        font-size: 48px;
+        font-size:42px;
     }
 
     .about-hero-box p{
-        font-size: 18px;
+        font-size:16px;
     }
 
-    .timeline-main-line{
-        left: 25px;
+    .journey-clean-wrapper{
+        width:92%;
     }
 
-    .timeline-entry{
-        grid-template-columns: 90px 1fr;
-        gap: 20px;
+    .journey-clean-card{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .timeline-year{
-        grid-column: span 2;
-        text-align: left;
-        padding-left: 80px;
-        font-size: 20px;
+    .journey-left{
+        width:100%;
+        flex-direction:row;
+        justify-content:space-between;
     }
 
-    .timeline-card{
-        padding: 22px;
+    .journey-right{
+        width:100%;
+        border-left:none;
+        border-top:4px solid #ED7014;
+        padding-left:0;
+        padding-top:16px;
     }
 
-    .timeline-card h2{
-        font-size: 24px;
+    .journey-right h2{
+        font-size:20px;
     }
 
-    .timeline-card p{
-        font-size: 15px;
-    }
-
-    .timeline-icon{
-        width: 65px;
-        height: 65px;
-    }
-
-    .timeline-icon i{
-        font-size: 24px;
+    .journey-right p{
+        font-size:14px;
     }
 }
 </style>
